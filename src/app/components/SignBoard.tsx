@@ -78,8 +78,8 @@ const SignBoard: FC<SignBoardProps> = ({isOpen, size, style, bed, car, bath, auc
 
 
         <div className='flex justify-between'>
-            <div className='w-[10px] h-[100px] bg-gray-700'></div>
-            <div className='w-[10px] h-[100px] bg-gray-700'></div>
+            <div className='w-[10px] h-[100px] bg-gray-400'></div>
+            <div className='w-[10px] h-[100px] bg-gray-400'></div>
         </div>
 
         <div className='flex justify-center mt-10'>
