@@ -1,113 +1,127 @@
-import Image from 'next/image'
+'use client'
+import Image from "next/image";
+import SignBoard from "./components/SignBoard";
+import { useCallback, useRef, useState } from "react";
+import { toPng } from 'html-to-image';
 
 export default function Home() {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onButtonClick = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+
+    toPng(ref.current, { cacheBust: true, })
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'my-image-name.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [ref])
+ 
+  const [size, setSize] = useState({style: '', name: ""})
+  const [isOpen, setIsOpen] = useState(false)
+  const [amenities, setAmenities] = useState({bed: 0, bath: 0, car: 0}) 
+
+  const [auction, setAuction] = useState('')
+  const [type, setType] = useState('')
+
+
+  function changeSize(e:any) {
+
+    if(e.target.value == "none"){
+      setIsOpen(false)
+      setSize({...size, name: "Size"})
+    }else{
+
+      if(e.target.value == '600x900'){
+        setSize({name: e.target.value, style: 'w-[200px] h-[300px] aspect-[2/3]'})
+      }else if(e.target.value == '600x1200'){
+        setSize({name: e.target.value, style: 'w-[200px] h-[400px] aspect-[1/2]'})
+
+        
+      }else if(e.target.value == '900x1200'){
+        setSize({name: e.target.value, style: 'w-[300px] h-[400px] aspect-[3/4]'})
+ 
+      }else if(e.target.value == '900x1600'){
+        setSize({name: e.target.value, style: 'w-[300] h-[533px] aspect-[9/16]'})
+      }else if(e.target.value == '1200x1800'){
+        setSize({name: e.target.value, style: 'w-[min(100%,400px)] h-[600px] aspect-[2/3]'})
+      }else if(e.target.value == '1200x2400'){
+        setSize({name: e.target.value, style: 'w-[min(100%,400px)]  h-[800px] aspect-[1/2]'})
+      }
+      console.log(size)
+      
+      setIsOpen(true)
+    }
+
+  
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <section className="w-[min(100%,800px)] px-2 mx-auto py-5 md:flex justify-between">
+        <div className="">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl">Signboard Design</h1>
+        
+            <select value={size.name} onChange={(e) => changeSize(e.target.value)} name="size" id="size" className="border">
+              <option value="none">Size</option>
+              <option value="600x900">600mm x 900mm</option>
+              <option value="600x1200">600mm x 1200mm</option>
+              <option value="900x1200">900mm x 1200mm</option>
+              <option value="900x1600">900mm x 1600mm</option>
+              <option value="1200x1800">1200mm x 1800mm</option>
+              <option value="1200x2400">1200mm x 2400mm</option>
+            </select>
+
+            <select name="type" id="type" value={type} onChange={(e) => setType(e.target.value)} className="border">
+              <option value="none">Type</option>
+              <option value="Generic">Generic</option>
+              <option value="Photosign">Photosign</option>
+            </select>
+            <div className="grid grid-cols-[auto_1fr] gap-y-2">
+              <label htmlFor="" className="border px-2">EER</label>
+              <input type="text" disabled className="border bg-red-200"/>
+      
+              <label htmlFor="" className="border px-2">BED</label>
+              <input type="number" min={0} value={amenities.bed} onChange={(e) => setAmenities({...amenities, bed: e.target.valueAsNumber})} className="border bg-gray-200"/>
+        
+              <label htmlFor="" className="border px-2">BATH</label>
+              <input type="number" min={0} value={amenities.bath} onChange={(e) => setAmenities({...amenities, bath: e.target.valueAsNumber})} className="border bg-gray-200"/>
+       
+              <label htmlFor="" className="border px-2">CAR</label>
+              <input type="number" min={0} value={amenities.car} onChange={(e) => setAmenities({...amenities, car: e.target.valueAsNumber})} className="border bg-gray-200"/>
+
+              <label htmlFor="" className="border px-2">AUCTION</label>
+              <input type="text" value={auction} onChange={(e) => setAuction(e.target.value)} className="border bg-gray-200"/>
+
+              <label htmlFor="" className="border px-2">PHOTO 1</label>
+              <input type="text" disabled className="border bg-red-200"/>
+              <label htmlFor="" className="border px-2">PHOTO 2</label>
+              <input type="text" disabled className="border bg-red-200"/>
+              <label htmlFor="" className="border px-2">PHOTO 3</label>
+              <input type="text" disabled className="border bg-red-200"/>
+              <label htmlFor="" className="border px-2">PHOTO 4</label>
+              <input type="text" disabled className="border bg-red-200"/>
+            </div>
+            {isOpen &&  <button className="border rounded-md" onClick={onButtonClick}>Download Image</button> }
+           
+          </div>
+       
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <div id="screenshot" ref={ref} className="md:grow flex items-center justify-center py-5">
+          <SignBoard  style={size.style} bed={amenities.bed} bath={amenities.bath} car={amenities.car} isOpen={isOpen} size={size.name} type={type} auction={auction}/>
+  
+        </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
     </main>
-  )
+  );
 }
