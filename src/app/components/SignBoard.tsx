@@ -1,8 +1,6 @@
 'use client'
-import { FC, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
-
-
+import { FC, useCallback, useRef } from 'react'
+import { toPng } from 'html-to-image';
 
 type SignBoardProps = {
   size: string
@@ -17,7 +15,26 @@ type SignBoardProps = {
 }
 
 const SignBoard: FC<SignBoardProps> = ({isOpen, size, style, bed, car, bath, auction, type}) => {
-  const [newSize, setNewSize] = useState('')
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onButtonClick = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+
+    toPng(ref.current, { cacheBust: true, })
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'my-image-name.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [ref])
+
 
 
     if(!isOpen) return null
@@ -26,7 +43,7 @@ const SignBoard: FC<SignBoardProps> = ({isOpen, size, style, bed, car, bath, auc
     <>
     <div className=''>
 
-        <div className={`${style} bg-black text-white py-5 flex flex-col justify-between`}>
+        <div id="signage" ref={ref} className={`${style} bg-black text-white py-5 flex flex-col justify-between`}>
 
           <div id="header" className='flex flex-col items-center gap-y-2'>
           <h1 className='text-center'>Signboard {size}</h1>
@@ -63,6 +80,10 @@ const SignBoard: FC<SignBoardProps> = ({isOpen, size, style, bed, car, bath, auc
         <div className='flex justify-between'>
             <div className='w-[10px] h-[100px] bg-gray-700'></div>
             <div className='w-[10px] h-[100px] bg-gray-700'></div>
+        </div>
+
+        <div className='flex justify-center mt-10'>
+        {isOpen &&  <button className="border rounded-md bg-blue-200 py-1" onClick={onButtonClick}>Download Image</button> }
         </div>
     </div>
      </>

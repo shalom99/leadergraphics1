@@ -1,28 +1,11 @@
 'use client'
-import Image from "next/image";
+
 import SignBoard from "./components/SignBoard";
-import { useCallback, useRef, useState } from "react";
-import { toPng } from 'html-to-image';
+import { useState } from "react";
+
 
 export default function Home() {
-  const ref = useRef<HTMLDivElement>(null)
 
-  const onButtonClick = useCallback(() => {
-    if (ref.current === null) {
-      return
-    }
-
-    toPng(ref.current, { cacheBust: true, })
-      .then((dataUrl) => {
-        const link = document.createElement('a')
-        link.download = 'my-image-name.png'
-        link.href = dataUrl
-        link.click()
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [ref])
  
   const [size, setSize] = useState({style: '', name: ""})
   const [isOpen, setIsOpen] = useState(false)
@@ -34,26 +17,26 @@ export default function Home() {
 
   function changeSize(e:any) {
 
-    if(e.target.value == "none"){
+    if(e == "none"){
       setIsOpen(false)
       setSize({...size, name: "Size"})
     }else{
 
-      if(e.target.value == '600x900'){
-        setSize({name: e.target.value, style: 'w-[200px] h-[300px] aspect-[2/3]'})
-      }else if(e.target.value == '600x1200'){
-        setSize({name: e.target.value, style: 'w-[200px] h-[400px] aspect-[1/2]'})
+      if(e == '600x900'){
+        setSize({name: e, style: 'w-[200px] h-[300px] aspect-[2/3]'})
+      }else if(e == '600x1200'){
+        setSize({name: e, style: 'w-[200px] h-[400px] aspect-[1/2]'})
 
         
-      }else if(e.target.value == '900x1200'){
-        setSize({name: e.target.value, style: 'w-[300px] h-[400px] aspect-[3/4]'})
+      }else if(e == '900x1200'){
+        setSize({name: e, style: 'w-[300px] h-[400px] aspect-[3/4]'})
  
-      }else if(e.target.value == '900x1600'){
-        setSize({name: e.target.value, style: 'w-[300] h-[533px] aspect-[9/16]'})
-      }else if(e.target.value == '1200x1800'){
-        setSize({name: e.target.value, style: 'w-[min(100%,400px)] h-[600px] aspect-[2/3]'})
-      }else if(e.target.value == '1200x2400'){
-        setSize({name: e.target.value, style: 'w-[min(100%,400px)]  h-[800px] aspect-[1/2]'})
+      }else if(e == '900x1600'){
+        setSize({name: e, style: 'w-[300] h-[533px] aspect-[9/16]'})
+      }else if(e == '1200x1800'){
+        setSize({name: e, style: 'w-[min(100%,400px)] h-[600px] aspect-[2/3]'})
+      }else if(e == '1200x2400'){
+        setSize({name: e, style: 'w-[min(100%,400px)]  h-[800px] aspect-[1/2]'})
       }
       console.log(size)
       
@@ -110,13 +93,13 @@ export default function Home() {
               <label htmlFor="" className="border px-2">PHOTO 4</label>
               <input type="text" disabled className="border bg-red-200"/>
             </div>
-            {isOpen &&  <button className="border rounded-md" onClick={onButtonClick}>Download Image</button> }
+     
            
           </div>
        
         </div>
 
-        <div id="screenshot" ref={ref} className="md:grow flex items-center justify-center py-5">
+        <div id="screenshot"  className="md:grow flex items-center justify-center py-5">
           <SignBoard  style={size.style} bed={amenities.bed} bath={amenities.bath} car={amenities.car} isOpen={isOpen} size={size.name} type={type} auction={auction}/>
   
         </div>
