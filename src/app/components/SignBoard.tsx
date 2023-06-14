@@ -83,7 +83,7 @@ const SignBoard: FC<SignBoardProps> = ({isOpen, size, style, bed, car, bath, auc
         </div>
 
         <div className='flex justify-center mt-10'>
-        {isOpen &&  <button className="border rounded-md bg-blue-200 py-1" onClick={onButtonClick}>Download Image</button> }
+        {isOpen &&  <button className="border rounded-md bg-blue-200 py-1 px-2" onClick={onButtonClick}>Download Image</button> }
         </div>
     </div>
      </>
