@@ -4,47 +4,35 @@ import SignBoard from "./components/SignBoard";
 import { useState } from "react";
 
 
+const INITIAL_DATA = {
+  sizes: [
+    {name: 'Size', style: 'none'},
+    {name: '600mm x 900mm', style: 'w-[200px] h-[300px] aspect-[2/3]'},
+    {name: '600mm x 1200mm', style: 'w-[200px] h-[400px] aspect-[1/2]'},
+    {name: '900mm x 1200mm', style: 'w-[300px] h-[400px] aspect-[3/4]'},
+    {name: '900mm x 1600mm', style: 'w-[300] h-[533px] aspect-[9/16]'},
+    {name: '1200mm x 1800mm', style: 'w-[min(100%,400px)] h-[600px] aspect-[2/3]'},
+    {name: '1200mm x 2400mm', style: 'w-[min(100%,400px)] h-[800px] aspect-[1/2]'},
+     ],
+  size: "Size",
+  bed: 0,
+  bath: 0,
+  car: 0,
+  selected: "",
+  style: "",
+  type: "",
+  auction: "",
+}
+
+
+
+
+
 export default function Home() {
-
- 
-  const [size, setSize] = useState({style: '', name: ""})
+  const [signageData, setSignageData] = useState(INITIAL_DATA)
   const [isOpen, setIsOpen] = useState(false)
-  const [amenities, setAmenities] = useState({bed: 0, bath: 0, car: 0}) 
 
-  const [auction, setAuction] = useState('')
-  const [type, setType] = useState('')
-
-
-  function changeSize(e:any) {
-
-    if(e == "none"){
-      setIsOpen(false)
-      setSize({...size, name: "Size"})
-    }else{
-
-      if(e == '600x900'){
-        setSize({name: e, style: 'w-[200px] h-[300px] aspect-[2/3]'})
-      }else if(e == '600x1200'){
-        setSize({name: e, style: 'w-[200px] h-[400px] aspect-[1/2]'})
-
-        
-      }else if(e == '900x1200'){
-        setSize({name: e, style: 'w-[300px] h-[400px] aspect-[3/4]'})
- 
-      }else if(e == '900x1600'){
-        setSize({name: e, style: 'w-[300] h-[533px] aspect-[9/16]'})
-      }else if(e == '1200x1800'){
-        setSize({name: e, style: 'w-[min(100%,400px)] h-[600px] aspect-[2/3]'})
-      }else if(e == '1200x2400'){
-        setSize({name: e, style: 'w-[min(100%,400px)]  h-[800px] aspect-[1/2]'})
-      }
-      console.log(size)
-      
-      setIsOpen(true)
-    }
-
-  
-  }
+  console.log(`initial data: ${JSON.stringify(signageData)}`)
 
   return (
     <main>
@@ -53,17 +41,15 @@ export default function Home() {
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl">Signboard Design</h1>
         
-            <select value={size.name} onChange={(e) => changeSize(e.target.value)} name="size" id="size" className="border">
-              <option value="none">Size</option>
-              <option value="600x900">600mm x 900mm</option>
-              <option value="600x1200">600mm x 1200mm</option>
-              <option value="900x1200">900mm x 1200mm</option>
-              <option value="900x1600">900mm x 1600mm</option>
-              <option value="1200x1800">1200mm x 1800mm</option>
-              <option value="1200x2400">1200mm x 2400mm</option>
+            <select value={signageData.selected} onChange={changeSize} name="size" id="size" className="border">
+              {signageData.sizes.map((size) => {
+                return (
+                  <option key={size.name} value={size.style}>{size.name}</option>
+                )
+              })}
             </select>
 
-            <select name="type" id="type" value={type} onChange={(e) => setType(e.target.value)} className="border">
+            <select name="type" id="type" value={signageData.type} onChange={(e) => setSignageData({...signageData, type: e.target.value})} className="border">
               <option value="none">Type</option>
               <option value="Generic">Generic</option>
               <option value="Photosign">Photosign</option>
@@ -73,16 +59,16 @@ export default function Home() {
               <input type="text" disabled className="border bg-red-200"/>
       
               <label htmlFor="" className="border px-2">BED</label>
-              <input type="number" min={0} value={amenities.bed} onChange={(e) => setAmenities({...amenities, bed: e.target.valueAsNumber})} className="border bg-gray-200"/>
+              <input type="number" min={0} value={signageData.bed} onChange={(e) => setSignageData({...signageData, bed: e.target.valueAsNumber})} className="border bg-gray-200"/>
         
               <label htmlFor="" className="border px-2">BATH</label>
-              <input type="number" min={0} value={amenities.bath} onChange={(e) => setAmenities({...amenities, bath: e.target.valueAsNumber})} className="border bg-gray-200"/>
+              <input type="number" min={0} value={signageData.bath} onChange={(e) => setSignageData({...signageData, bath: e.target.valueAsNumber})} className="border bg-gray-200"/>
        
               <label htmlFor="" className="border px-2">CAR</label>
-              <input type="number" min={0} value={amenities.car} onChange={(e) => setAmenities({...amenities, car: e.target.valueAsNumber})} className="border bg-gray-200"/>
+              <input type="number" min={0} value={signageData.car} onChange={(e) => setSignageData({...signageData, car: e.target.valueAsNumber})} className="border bg-gray-200"/>
 
               <label htmlFor="" className="border px-2">AUCTION</label>
-              <input type="text" value={auction} onChange={(e) => setAuction(e.target.value)} className="border bg-gray-200"/>
+              <input type="text" value={signageData.auction} onChange={(e) => setSignageData({...signageData, auction: e.target.value})} className="border bg-gray-200"/>
 
               <label htmlFor="" className="border px-2">PHOTO 1</label>
               <input type="text" disabled className="border bg-red-200"/>
@@ -94,17 +80,29 @@ export default function Home() {
               <input type="text" disabled className="border bg-red-200"/>
             </div>
      
-           
           </div>
-       
         </div>
 
         <div id="screenshot"  className="md:grow flex items-center justify-center py-5">
-          <SignBoard  style={size.style} bed={amenities.bed} bath={amenities.bath} car={amenities.car} isOpen={isOpen} size={size.name} type={type} auction={auction}/>
-  
+          <SignBoard {...signageData} isOpen={isOpen} />
         </div>
-
       </section>
     </main>
   );
+
+  function changeSize(e: React.ChangeEvent<HTMLSelectElement>) {
+    console.log(`selected: ${e.target.value}`)
+    console.log(`data: ${JSON.stringify(signageData)}`)
+    if(e.target.value === 'none'){
+      setIsOpen(false)
+      setSignageData(INITIAL_DATA)
+    }else {
+      setSignageData({...signageData, selected: e.target.value, style: e.target.value})
+      setIsOpen(true)
+    }
+
+     
+  
+
+}
 }
