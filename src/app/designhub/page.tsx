@@ -13,7 +13,7 @@ const DesignHub: FC<pageProps> = ({}) => {
         <div className='w-[min(700px, 100%)] py-5'>
             <h1 className='text-center font-black text-3xl mb-10'>Design Hub</h1>
 
-            <div className='grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-2'>
+            <div className='grid grid-cols-2 md:grid-cols-3 gap-x-2 lg:gap-x-10 gap-y-2'>
 
                 <div className='flex flex-col items-center gap-2'>
                     <p>Signboard</p>

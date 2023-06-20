@@ -7,7 +7,7 @@ type pageProps = {};
 
 const Signup: FC<pageProps> = ({}) => {
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-screen flex items-center justify-center px-2 md:px-0">
+    <div className="bg-main-bg bg-no-repeat bg-cover h-full md:h-screen flex items-center justify-center px-2 md:px-0 py-10">
       <div className="relative w-[450px]">
         <div className="absolute top-0 left-0 right-0 text-xs gap-1 text-white bg-black rounded-full px-5 py-8 flex items-center justify-between">
           <h1 className="grow text-center text-2xl">Welcome </h1>
