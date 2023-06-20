@@ -2,6 +2,8 @@
 import { FC, useCallback, useRef } from 'react'
 import { toPng } from 'html-to-image';
 
+
+
 type SignBoardProps = {
   size: string
   type: string
@@ -49,13 +51,9 @@ const SignBoard: FC<SignBoardProps> = ({isOpen, size, style, bed, car, bath, auc
           <h1 className='text-center'>Signboard {size}</h1>
               <div className=''>{type !== 'none' && type  }</div>
               <div>{auction && <p>Auction: {auction}</p>}
-                
-   
+            
               </div>
           </div>
-
-          
-       
 
 
           <div id="footer" className='justify-self-end flex justify-center gap-5 text-xs'>

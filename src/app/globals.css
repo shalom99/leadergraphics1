@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+.signup-form {
+  border-radius: 50px 51px 90px 90px;
+  -webkit-border-radius: 50px 51px 90px 90px;
+  -moz-border-radius: 50px 51px 90px 90px;
+}
