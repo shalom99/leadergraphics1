@@ -14,7 +14,6 @@ const DesignHub: FC<pageProps> = ({}) => {
             <h1 className='text-center font-black text-3xl mb-10'>Design Hub</h1>
 
             <div className='grid grid-cols-2 md:grid-cols-3 gap-x-2 lg:gap-x-10 gap-y-2'>
-
                 <div className='flex flex-col items-center gap-2'>
                     <p>Signboard</p>
                     <Image src='/img_sample.jpg' alt="Logo" width={150} height={150} className='mb-5'/>

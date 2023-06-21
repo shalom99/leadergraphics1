@@ -26,7 +26,7 @@ const Login: FC<pageProps> = ({}) => {
         </form>
     </div>
     <div className='absolute left-0 right-0 bottom-[-20px] text-xs gap-1 text-white bg-black rounded-full py-10 flex items-center justify-center'>
-        <p>Don&apos;t&apos; have an account?</p>
+        <p>Don&apos;t have an account?</p>
         <Link href="/signup" className='font-bold'>Sign Up</Link>
     </div>
     </div>
