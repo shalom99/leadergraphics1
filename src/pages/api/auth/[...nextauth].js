@@ -1,10 +1,8 @@
-import NextAuth from "next-auth/next";
-import prisma from '@/app/libs/prismadb'
+import NextAuth from "next-auth"
+
+import CredentialsProvider from "next-auth/providers/credentials";
+import {prisma} from "@/app/libs/prismadb";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import  CredentialsProvider  from "next-auth/providers/credentials";
-
-import bcrypt from 'bcrypt'
-
 
 export const authOptions = {
     adapters: PrismaAdapter(prisma),
@@ -14,7 +12,7 @@ export const authOptions = {
             credentials: {
                 email: { label: "Email", type: "text", placeholder: "jsmith" },
                 password: { label: "Password", type: "password" },
-                username: { label: "Username", type: "text", placeholder: "John Smith" },
+                username: { label: "Username", type: "text", placeholder: "shalom" },
             },
             async authorize(credentials) {
               
@@ -55,6 +53,4 @@ export const authOptions = {
 
 }
 
-const handler = NextAuth(authOptions)
-
-export { handler as GET, handler as POST}
+export default NextAuth(authOptions)
