@@ -146,7 +146,9 @@ const Signup: FC<pageProps> = ({}) => {
           
           </form>
 
-          <div>{JSON.stringify(signupData)}</div>
+          <div>
+            <h1>test</h1>
+            {JSON.stringify(signupData)}</div>
         </div>
       </div>
     </div>
