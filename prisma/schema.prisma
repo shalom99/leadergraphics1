@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account_Types {
+  id       Int        @id @default(autoincrement())
+  type     String     @db.VarChar(255)
+  Accounts Accounts[]
+}
+
+model Accounts {
+  id              Int           @id @default(autoincrement()) @db.UnsignedInt
+  first_name      String        @db.Char(255)
+  last_name       String        @db.Char(255)
+  mobile          String        @db.VarChar(255)
+  email           String        @db.VarChar(255)
+  hashed_password String        @db.VarChar(255)
+  used_passwords  String?       @db.VarChar(255)
+  is_agent        Boolean
+  agency          Int?
+  profile_image   String?       @db.VarChar(255)
+  created_at      DateTime?     @db.DateTime(0)
+  updated_at      DateTime?     @db.DateTime(0)
+  account_type    Int
+  Account_Types   Account_Types @relation(fields: [account_type], references: [id], onUpdate: Restrict, map: "Accounts_ibfk_1")
+  Agencies        Agencies?     @relation(fields: [agency], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "Accounts_ibfk_2")
+
+  @@index([account_type], map: "account_type")
+  @@index([agency], map: "agency")
+}
+
+model Agencies {
+  id        Int        @id @default(autoincrement())
+  name      String     @db.Char(255)
+  address   String     @db.VarChar(255)
+  telephone String     @db.VarChar(255)
+  Accounts  Accounts[]
+}

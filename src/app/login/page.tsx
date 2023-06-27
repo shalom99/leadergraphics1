@@ -1,13 +1,14 @@
-import { url } from 'inspector'
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 type pageProps = {
   
 }
 
 const Login: FC<pageProps> = ({}) => {
+  const [data, setData] = useState({})
   return (
     <div className="bg-main-bg bg-no-repeat bg-cover h-screen flex items-center justify-center">
         <div className='relative w-[300px]'>
