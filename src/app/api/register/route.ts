@@ -2,38 +2,63 @@ import bcrypt from 'bcrypt'
 import {prisma} from '@/app/libs/prismadb'
 import { NextResponse} from 'next/server'
 
-// import { PrismaClient } from '@prisma/client'
-
-
-// const prisma = new PrismaClient({ datasources: {  db: { url: "mysql://yourdburlstringhere" } } });
 
 export async function POST(request: Request) {
+    const body = await request.json();
+    const { firstName, lastName, mobile, email, password, isAgent, agency } = body;
+    console.log( firstName, lastName, mobile, email, password, isAgent, agency)
+    let userType = 0;
 
 
     // check if input data is empty
-    // if(!name || !email || !password) {
-    //     return new NextResponse('Missing Fields', {status: 400})
-    // }
+    if(!firstName || !lastName || !mobile|| !email || !password) {
+        return new NextResponse('Missing Fields', {status: 400})
+    }
 
-    
-    // const exist = await prisma.user.findUnique({
-    //     where: {
-    //         email
-    //     }
-    // });
+       
+    const email_exist = await prisma.accounts.findUnique({
+        where: {
+            email
+        }
+    });
 
-    // if(exist) {
-    //     throw new Error('Email already exists')
-    // }
+    const number_exist = await prisma.accounts.findUnique({
+        where: {
+            mobile
+        }
+    });
 
+    if(email_exist || number_exist ) {
+        throw new Error('Email or Mobile number already exists')
+    }
 
+   
+    if(Number(isAgent) === 1) {
+        userType = 801
+        
+    }else{
+        userType = 800
+    }
 
-    const user = await prisma.account_Types.create({
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const user = await prisma.accounts.create({
         data: {
-            type: 'test'
-     
+            first_name: firstName,
+            last_name: lastName,
+            mobile,
+            email,
+            hashed_password: hashedPassword,
+            is_agent: isAgent === 1 ? true : false,
+            agency: null,
+            account_type: userType
         }
     });
 
     return NextResponse.json(user)
 }
+
+
+
+
+

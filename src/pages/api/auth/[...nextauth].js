@@ -1,18 +1,18 @@
-import NextAuth from "next-auth"
-
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth from "next-auth/next";
 import {prisma} from "@/app/libs/prismadb";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from 'bcrypt'
 
 export const authOptions = {
-    adapters: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
     providers: [
+    
         CredentialsProvider({
             name: "credentials",
             credentials: {
-                email: { label: "Email", type: "text", placeholder: "jsmith" },
+                email: { label: "Email", type: "text", placeholder: "Email" },
                 password: { label: "Password", type: "password" },
-                username: { label: "Username", type: "text", placeholder: "shalom" },
             },
             async authorize(credentials) {
               
@@ -22,19 +22,19 @@ export const authOptions = {
                 }
 
                 // check to see if user exists
-                const user = await prisma.user.findUnique({
+                const user = await prisma.accounts.findUnique({
                     where: {
                         email: credentials.email
                     }
                 });
 
                 // if no user was found 
-                if (!user || !user?.hashedPassword) {
+                if (!user || !user?.hashed_password) {
                     throw new Error('No user found')
                 }
 
                 // check to see if password matches
-                const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
+                const passwordMatch = await bcrypt.compare(credentials.password, user.hashed_password)
 
                 // if password does not match
                 if (!passwordMatch) {
@@ -50,7 +50,7 @@ export const authOptions = {
         strategy: "jwt",
     },
     debug: process.env.NODE_ENV === "development",
-
 }
-
 export default NextAuth(authOptions)
+
+

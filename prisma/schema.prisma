@@ -14,11 +14,11 @@ model Account_Types {
 }
 
 model Accounts {
-  id              Int           @id @default(autoincrement()) @db.UnsignedInt
+  id              Int           @id @default(autoincrement()) @db.UnsignedInt @unique
   first_name      String        @db.Char(255)
   last_name       String        @db.Char(255)
-  mobile          String        @db.VarChar(255)
-  email           String        @db.VarChar(255)
+  mobile          String        @db.VarChar(255) @unique
+  email           String        @db.VarChar(255) @unique
   hashed_password String        @db.VarChar(255)
   used_passwords  String?       @db.VarChar(255)
   is_agent        Boolean

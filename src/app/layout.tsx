@@ -1,4 +1,4 @@
-import Provider from './context/AuthContext'
+import Provider from './providers/AuthContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
