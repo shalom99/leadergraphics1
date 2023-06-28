@@ -1,5 +1,5 @@
-import NextAuth from "next-auth/next";
-import {prisma} from "@/app/libs/prismadb";
+import NextAuth from "next-auth";
+import { prisma } from "@/app/libs/prismadb";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt'
@@ -7,7 +7,6 @@ import bcrypt from 'bcrypt'
 export const authOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
-    
         CredentialsProvider({
             name: "credentials",
             credentials: {
@@ -15,9 +14,9 @@ export const authOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-              
+
                 // check to see if email and password is there
-                if(!credentials.email || !credentials.password) {
+                if (!credentials?.email || !credentials.password) {
                     throw new Error('Please enter an email and password')
                 }
 
@@ -43,7 +42,7 @@ export const authOptions = {
 
                 return user;
             },
-        }),  
+        }),
     ],
     secret: process.env.SECRET,
     session: {

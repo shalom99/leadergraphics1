@@ -1,11 +1,11 @@
 'use client'
 
 import Link from "next/link";
-import { CSSProperties, FC, useState } from "react";
+import { CSSProperties, FC, useEffect, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import axios from 'axios'
 import {toast} from 'react-hot-toast'
-import { error } from "console";
+
 import { useRouter } from "next/navigation";
 import { PuffLoader } from "react-spinners";
 type pageProps = {};
@@ -25,7 +25,7 @@ const Signup: FC<pageProps> = ({}) => {
   })
 
   const [loading, setLoading] = useState(false)
- 
+  
 
   const [confirmPassword, setConfirmPassword] = useState({
     firstpw: '',
@@ -34,23 +34,25 @@ const Signup: FC<pageProps> = ({}) => {
 
   const [passwordHelper, setPasswordHelper] = useState('')
 
+  useEffect(() => {
+    if(confirmPassword.firstpw === confirmPassword.confirmpw){
+      setSignupData({...signupData, password: confirmPassword.firstpw})
+    }else{
+      setSignupData({...signupData, password: ''})
+    }
+  }, [confirmPassword])
 
 
   const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if(confirmPassword.firstpw !== confirmPassword.confirmpw){
-      setSignupData({...signupData, password: ''})
       toast.error('Password do not match!')
       return null
     }else{
       setLoading(true)
-      setSignupData({...signupData, password: confirmPassword.firstpw})
       if(confirmPassword.firstpw === confirmPassword.confirmpw){
         signupUser()
       }
-  
-   
     }
   }
    
@@ -80,7 +82,6 @@ const Signup: FC<pageProps> = ({}) => {
       }
       toast.error("Form error, please check input");
       // console.log(e.config)
-
     })
     .finally(() => {
       setLoading(false)
@@ -223,13 +224,13 @@ const Signup: FC<pageProps> = ({}) => {
           
           </form>
 
-            {/* <div>
+            <div>
             <h1>test</h1>
             {JSON.stringify(signupData)}
          
             {JSON.stringify(confirmPassword)}
             {JSON.stringify(passwordHelper)}
-            </div> */}
+            </div>
         </div>
         {loading &&  <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center backdrop-blur-3xl">
         <PuffLoader
