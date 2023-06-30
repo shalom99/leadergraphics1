@@ -26,7 +26,6 @@ const Signup: FC<pageProps> = ({}) => {
 
   const [loading, setLoading] = useState(false)
   
-
   const [confirmPassword, setConfirmPassword] = useState({
     firstpw: '',
     confirmpw: '',
@@ -223,14 +222,14 @@ const Signup: FC<pageProps> = ({}) => {
             </button>
           
           </form>
-
+{/* 
             <div>
             <h1>test</h1>
             {JSON.stringify(signupData)}
          
             {JSON.stringify(confirmPassword)}
             {JSON.stringify(passwordHelper)}
-            </div>
+            </div> */}
         </div>
         {loading &&  <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center backdrop-blur-3xl">
         <PuffLoader
