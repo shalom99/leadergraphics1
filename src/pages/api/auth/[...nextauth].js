@@ -40,6 +40,8 @@ export const authOptions = {
                     throw new Error('Incorrect password')
                 }
 
+                
+
                 return user;
             },
         }),

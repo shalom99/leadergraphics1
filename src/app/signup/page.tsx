@@ -8,6 +8,7 @@ import {toast} from 'react-hot-toast'
 
 import { useRouter } from "next/navigation";
 import { PuffLoader } from "react-spinners";
+import Loader from "../components/Loader";
 type pageProps = {};
 
 
@@ -222,6 +223,7 @@ const Signup: FC<pageProps> = ({}) => {
             </button>
           
           </form>
+    
 {/* 
             <div>
             <h1>test</h1>
@@ -231,16 +233,7 @@ const Signup: FC<pageProps> = ({}) => {
             {JSON.stringify(passwordHelper)}
             </div> */}
         </div>
-        {loading &&  <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center backdrop-blur-3xl">
-        <PuffLoader
-        color="#63cdf5"
-        loading={loading}
- 
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-</div>}
+      <Loader loading={loading}/>
        
       </div>
     </div>

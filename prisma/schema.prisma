@@ -14,11 +14,11 @@ model Account_Types {
 }
 
 model Accounts {
-  id              Int           @id @default(autoincrement()) @db.UnsignedInt @unique
+  id              Int           @id @unique @default(autoincrement()) @db.UnsignedInt
   first_name      String        @db.Char(255)
   last_name       String        @db.Char(255)
-  mobile          String        @db.VarChar(255) @unique
-  email           String        @db.VarChar(255) @unique
+  mobile          String        @unique @db.VarChar(255)
+  email           String        @unique @db.VarChar(255)
   hashed_password String        @db.VarChar(255)
   used_passwords  String?       @db.VarChar(255)
   is_agent        Boolean
@@ -40,4 +40,19 @@ model Agencies {
   address   String     @db.VarChar(255)
   telephone String     @db.VarChar(255)
   Accounts  Accounts[]
+  Agents    Agents[]
+}
+
+model Agents {
+  id            Int       @id @default(autoincrement()) @db.UnsignedInt
+  first_name    String    @db.Char(255)
+  last_name     String    @db.Char(255)
+  mobile        String    @db.VarChar(255)
+  profile_image String?   @db.VarChar(255)
+  created_at    DateTime  @default(now()) @db.DateTime(0)
+  edited_at     DateTime  @default(now()) @db.DateTime(0)
+  agency        Int?
+  Agencies      Agencies? @relation(fields: [agency], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "Agents_ibfk_1")
+
+  @@index([agency], map: "agency")
 }
