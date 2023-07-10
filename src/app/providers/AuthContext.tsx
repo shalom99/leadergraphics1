@@ -1,11 +1,9 @@
-"use client";
 
-import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 
-export default function Provider({ children }: { children: React.ReactNode }) {
+export default function ToastProvider() {
   return (
-    <SessionProvider>
+ 
       <Toaster
         toastOptions={{
           duration: 3000,
@@ -15,7 +13,6 @@ export default function Provider({ children }: { children: React.ReactNode }) {
           },
         }}
       />
-      {children}
-    </SessionProvider>
+  
   );
 }

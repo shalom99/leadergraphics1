@@ -1,17 +1,17 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import { prisma } from "@/app/libs/prismadb";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt'
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: "credentials",
             credentials: {
-                email: { label: "Email", type: "text", placeholder: "Email" },
-                password: { label: "Password", type: "password" },
+                email: { label: "email", type: "text"},
+                password: { label: "password", type: "password" },
             },
             async authorize(credentials) {
 
@@ -27,10 +27,19 @@ export const authOptions = {
                     }
                 });
 
+
                 // if no user was found 
                 if (!user || !user?.hashed_password) {
                     throw new Error('No user found')
                 }
+
+
+
+                // const agencyName = await prisma.agencies.findUnique({
+                //     where: {
+                //         id: user.agency
+                //     }
+                //  })
 
                 // check to see if password matches
                 const passwordMatch = await bcrypt.compare(credentials.password, user.hashed_password)
@@ -40,9 +49,10 @@ export const authOptions = {
                     throw new Error('Incorrect password')
                 }
 
-                
+          
 
-                return user;
+                console.log(user)
+                return user as any;
             },
         }),
     ],
@@ -51,7 +61,10 @@ export const authOptions = {
         strategy: "jwt",
     },
     debug: process.env.NODE_ENV === "development",
+    pages: {
+        signIn: '/login',
+    }
 }
-export default NextAuth(authOptions)
 
+export default NextAuth(authOptions)
 

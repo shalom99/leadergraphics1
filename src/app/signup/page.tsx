@@ -5,15 +5,16 @@ import { CSSProperties, FC, useEffect, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import axios from 'axios'
 import {toast} from 'react-hot-toast'
-
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { PuffLoader } from "react-spinners";
+
 import Loader from "../components/Loader";
 type pageProps = {};
 
 
 
 const Signup: FC<pageProps> = ({}) => {
+
   const router = useRouter()
   const [signupData, setSignupData] = useState({
     firstName: '',
@@ -216,8 +217,6 @@ const Signup: FC<pageProps> = ({}) => {
               required
             />
 
-   
-         
             <button type="submit" className=" bg-primaryBlue rounded-full px-5 py-2 text-xs font-bold">
               SUBMIT
             </button>

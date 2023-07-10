@@ -1,40 +1,29 @@
 import { NextRequest,NextResponse} from 'next/server'
 import { getServerSession } from "next-auth/next"
 import {prisma} from '@/app/libs/prismadb'
+import authOptions  from '@/pages/api/auth/[...nextauth]'
 
 
 export async function POST(request: Request) {
 
     const body = await request.json();
-  
+    console.log(JSON.stringify(body))
     console.log(body)
-  
-    const agencyId = await prisma.accounts.findUnique({
-        where: {
-            email: body
-        },
-        select: {
-            agency: true
-        }
-    });
-    console.log(agencyId?.agency)
-
-    const users = await prisma.agents.findMany({
-        where: {
-            agency: agencyId?.agency
-        }
-    })
-
-    //console.log(users)
-
-    // const agencyId = await prisma.account_Types.findUnique({
+    console.log('api agencyid')
+    // if(!agencyId){
+    //     throw new Error('data empty')
+    // }
+    
+    // const users = await prisma.agents.findMany({
     //     where: {
-    //         email: agency
+    //         agency: parseInt(agencyId)
     //     }
     // })
 
+    // console.log(users)
 
-    return NextResponse.json(users)
+
+    return NextResponse.json('users')
 }
 
 
