@@ -113,7 +113,7 @@ const CreateUser: FC<CreateUserProps> = ({ showModal, setShowModal }) => {
                 className="bg-black text-white pl-2"
               />
 
-              {/* <p>{JSON.stringify(userData)}</p> */}
+      
             </div>
           </div>
           <div className="pt-5">
@@ -134,7 +134,7 @@ const CreateUser: FC<CreateUserProps> = ({ showModal, setShowModal }) => {
               </button>
             </div>
           </div>
-          <p>{JSON.stringify(agentData)}</p>
+          {/* <p>{JSON.stringify(agentData)}</p> */}
         </form>
         <Loader loading={loading}/>
       </div>

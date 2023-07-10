@@ -12,7 +12,7 @@ const Profiles: FC<pageProps> = async ({}) => {
   const currentUser = await getCurrentUser();
   const currentAgency = await getAgency(currentUser?.agency);
   const profiles = await getProfiles(currentUser?.agency)
-  // console.log("server profile", profiles)
+  
 
   if(!currentUser){
     redirect("/login")

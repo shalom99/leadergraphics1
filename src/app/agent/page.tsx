@@ -1,10 +1,23 @@
 import { FC } from 'react'
+import getAgent from '../actions/getAgent';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 type pageProps = {
-  
+  agentId: any
+  context: any
+  searchParams: any
 }
 
-const Agent: FC<pageProps> = ({}) => {
+const Agent: FC<pageProps> = async ({searchParams}) => {
+
+  const currentAgent = await getAgent(Number(searchParams.agentId));
+  if(!currentAgent){
+    redirect('/login')
+  }
+  console.log(searchParams)
+  console.log(currentAgent)
+
   return (
     <div className="bg-main-bg bg-no-repeat bg-cover h-screen flex justify-center">
     <div className="w-[700px] flex flex-col items-center pt-20">
@@ -12,9 +25,14 @@ const Agent: FC<pageProps> = ({}) => {
     
      
       <div className="flex flex-col gap-20 mt-20 ">
-          <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold">CAMPAIGNS</button>
+          <h1 className='text-center font-bold text-2xl'>Account: {currentAgent?.first_name + " " + currentAgent?.last_name}</h1>
+  
+          <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold cursor-not-allowed">CAMPAIGNS</button>
+      
+          <Link href="/development">
           <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold">DESIGN HUB</button>
-          <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold">DRAFTS</button>
+          </Link>
+          <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold cursor-not-allowed">DRAFTS</button>
 
       </div>
   

@@ -57,7 +57,12 @@ console.log("client profiles", profiles)
               }
               return (
                 <div className="flex flex-col items-center" key={user.id}>
-              <Link href="/master">
+              <Link href={{
+                pathname: '/agent',
+                query: {
+                  agentId: user.id
+                }
+              }}>
                 <Image
                   src="/profile.png"
                   width={150}
