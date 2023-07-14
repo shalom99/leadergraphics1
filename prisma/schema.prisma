@@ -56,3 +56,10 @@ model Agents {
 
   @@index([agency], map: "agency")
 }
+
+model Templates {
+  id       Int     @id @default(autoincrement())
+  template Int?
+  basepdf  String? @db.LongText
+  agency   Int?
+}

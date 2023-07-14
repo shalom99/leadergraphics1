@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
 
-    <main className="bg-main-bg bg-no-repeat bg-cover h-screen flex flex-col justify-center items-center gap-y-[200px]">
+    <main className="bg-gradient-to-r from-rose-100 to-teal-100 h-screen flex flex-col justify-center items-center gap-y-[200px]">
       <h1 className="font-black text-xl">Home Page</h1>
       <Link href="/login" className="text-red-600 text-3xl">Login</Link>
   

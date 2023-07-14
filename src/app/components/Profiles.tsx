@@ -8,7 +8,9 @@ import { BiPlus } from "react-icons/bi";
 import { GiExitDoor } from "react-icons/gi";
 
 import CreateUser from "../modals/CreateUser";
-
+import { AiFillCloseCircle, AiOutlineMenu } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
+import AccountModal from "../modals/AccountModal";
 type pageProps = {
     currentAgency: any
     profiles: any
@@ -17,18 +19,40 @@ type pageProps = {
 
 const ProfileSelection: FC<pageProps> = ({currentAgency, profiles}) => {
 
-console.log("client profiles", profiles)
+// console.log("client profiles", profiles)
   const [showModal, setShowModal] = useState(false)
+  const [showAccountModal, setShowAccountModal] = useState(false)
 
   
+function handleModal(){
+  console.log("click")
+  // setShowAccountModal(prev => !prev)
+}
 
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-full flex justify-center">
-      <div className="w-[700px] flex flex-col items-center pt-20">
-        <div className=" gap-1 bg-primaryBlue rounded-full py-5 px-5 flex items-center justify-center">
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-full md:h-screen flex flex-col items-center pt-7">
+      <div className="w-full flex items-center justify-between px-5">
+      <Image
+            src="/lg_logo.png"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="select-none"
+            
+          />
+        <div onClick={() => {setShowAccountModal(prev => !prev)}} className="relative flex items-center bg-white rounded-full p-3 cursor-pointer select-none">
+        <FaUserCircle size={30} />
+        <AiOutlineMenu size={30}/>
+       <AccountModal  showAccountModal={showAccountModal} />
+    
+        </div>
+      </div>
+
+      <div id="profileUsers" className="w-[700px] flex flex-col items-center">
+        <div className="gap-1 bg-primaryBlue rounded-full py-5 px-20 flex items-center justify-center">
           <h2 className="text-2xl">
             Welcome Back:
-            <span className="font-bold"> {currentAgency.name} </span>
+            <span className="font-bold"> {currentAgency?.name} </span>
           </h2>
         </div>
 
@@ -85,13 +109,7 @@ console.log("client profiles", profiles)
             <p className="">Add User</p>
           </div>
 
-          <div
-            className="flex flex-col items-center cursor-pointer"
-            onClick={() => signOut({ callbackUrl: "/login" })}
-          >
-            <GiExitDoor size={150} className="bg-black text-white" />
-            <p>Sign Out</p>
-          </div>
+         
         </div>
       </div>
    

@@ -49,7 +49,7 @@ const LoginForm: FC = ({}) => {
   }
 
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-screen flex items-center justify-center">
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-screen flex items-center justify-center">
       <div className="relative w-[300px]">
         <div className="bg-white row-span-full row-start-1 row-end-7 flex flex-col items-center pt-10 pb-24 rounded-full">
           <Image

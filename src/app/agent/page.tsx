@@ -4,8 +4,6 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 type pageProps = {
-  agentId: any
-  context: any
   searchParams: any
 }
 
@@ -15,21 +13,21 @@ const Agent: FC<pageProps> = async ({searchParams}) => {
   if(!currentAgent){
     redirect('/login')
   }
-  console.log(searchParams)
-  console.log(currentAgent)
+  // console.log(searchParams)
+  // console.log(currentAgent)
 
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-screen flex justify-center">
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-screen flex justify-center">
     <div className="w-[700px] flex flex-col items-center pt-20">
    
     
-     
+
       <div className="flex flex-col gap-20 mt-20 ">
           <h1 className='text-center font-bold text-2xl'>Account: {currentAgent?.first_name + " " + currentAgent?.last_name}</h1>
   
           <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold cursor-not-allowed">CAMPAIGNS</button>
       
-          <Link href="/development">
+          <Link href="/designhub">
           <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold">DESIGN HUB</button>
           </Link>
           <button className="bg-primaryBlue rounded-full px-14 py-5 text-3xl font-bold cursor-not-allowed">DRAFTS</button>

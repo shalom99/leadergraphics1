@@ -11,7 +11,7 @@ type pageProps = {
 
 const DesignHub: FC<pageProps> = ({}) => {
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-full md:h-screen flex flex-col justify-center items-center">
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-full md:h-screen flex flex-col justify-center items-center">
         <div className='w-[min(700px, 100%)] py-5'>
             <h1 className='text-center font-black text-3xl mb-10'>Design Hub</h1>
 

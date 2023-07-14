@@ -12,6 +12,8 @@
     "@auth/prisma-adapter": "^1.0.0",
     "@hookform/resolvers": "^3.1.1",
     "@next-auth/prisma-adapter": "^1.0.7",
+    "@pdfme/generator": "^1.2.6",
+    "@pdfme/ui": "^1.2.6",
     "@prisma/client": "^4.16.1",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
