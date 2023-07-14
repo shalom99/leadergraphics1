@@ -8,7 +8,7 @@ type pageProps = {};
 
 const Profiles: FC<pageProps> = ({}) => {
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-screen flex justify-center">
+    <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-screen flex justify-center">
       <div className="w-[700px] flex flex-col items-center pt-20">
      
        <h1 className="text-2xl font-bold">Master Login</h1>

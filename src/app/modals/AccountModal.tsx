@@ -12,10 +12,10 @@ const AccountModal: FC<AccountModalProps> = ({showAccountModal}) => {
         return null
     }
   return (
-     <div className="absolute top-[60px] left-[-100px] right-0 rounded-xl bg-white px-5 pt-5 pb-5 flex flex-col gap-y-5">
-     <button className="border-b-2 pb-2">Options</button>
-     <button className="border-b-2 pb-2">Edit Profiles</button>
-     <button onClick={() => signOut({ callbackUrl: "/login" })} className="border-b-2 pb-2">Sign Out</button>
+     <div className="absolute top-[60px] left-[-100px] right-0 rounded-xl bg-white flex flex-col gap-y-3">
+     <button className="pt-3">Options</button>
+     <button className="">Edit Profiles</button>
+     <button onClick={() => signOut({ callbackUrl: "/login" })} className="border-t-2 py-2">Sign Out</button>
 
      {/* <button onClick={() => {setShowAccountModal(prev => !prev)}} className="absolute top-2 left-2"><AiFillCloseCircle size={25}/></button> */}
    </div>

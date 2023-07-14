@@ -41,8 +41,8 @@ function handleModal(){
             
           />
         <div onClick={() => {setShowAccountModal(prev => !prev)}} className="relative flex items-center bg-white rounded-full p-3 cursor-pointer select-none">
-        <FaUserCircle size={30} />
-        <AiOutlineMenu size={30}/>
+        <FaUserCircle size={30} className="text-primaryBlue" />
+        <AiOutlineMenu size={30} />
        <AccountModal  showAccountModal={showAccountModal} />
     
         </div>
@@ -67,7 +67,7 @@ function handleModal(){
                   width={150}
                   height={150}
                   alt="profile"
-                  className="bg-black p-3"
+                  className="bg-black p-3 rounded-xl hover:scale-105"
                 />
                 <p className="text-center">Master</p>
               </Link>
@@ -92,7 +92,7 @@ function handleModal(){
                   width={150}
                   height={150}
                   alt="profile"
-                  className="bg-black p-3"
+                  className="bg-black p-3 rounded-xl hover:scale-105"
                 />
                 <p className="text-center">{user.first_name +" " + user.last_name}</p>
               </Link>

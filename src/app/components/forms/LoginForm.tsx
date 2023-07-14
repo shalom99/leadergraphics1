@@ -35,6 +35,7 @@ const LoginForm: FC = ({}) => {
     signIn("credentials", { ...data, redirect: false }).then((callback) => {
       if (callback?.error) {
         toast.error(callback.error);
+        setLoading(false)
       }
 
       if (callback?.ok && !callback?.error) {
@@ -44,7 +45,7 @@ const LoginForm: FC = ({}) => {
 
       }
     }).finally(()=> {
-      setLoading(false)
+     
     });
   }
 
