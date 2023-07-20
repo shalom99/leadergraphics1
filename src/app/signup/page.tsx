@@ -145,7 +145,14 @@ const Signup: FC<pageProps> = ({}) => {
                     id="agent_yes"
                     value={1}
                     className="w-5 h-5"
-                    {...register("isAgent", {})}
+                    {...register("isAgent", {
+                      validate: (value: number) => {
+                        if (watch("isAgent") === value && !watch("agency")) {
+                            return "Please input company name if agent"
+                         
+                        }
+                      }
+                    })}
                   />
                 </div>
 

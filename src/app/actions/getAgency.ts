@@ -9,6 +9,7 @@ export async function getSession(){
 
 export default async function getAgency(agencyID: any){
     try{
+
         const session = await getSession();
 
         if(!session?.user?.email){

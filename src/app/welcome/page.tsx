@@ -1,13 +1,17 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
+import AccountNav from "../components/navbar/AccountNav";
 
 type pageProps = {};
 
 const Signup: FC<pageProps> = ({}) => {
+  const [showAccountModal, setShowAccountModal] = useState(false)
   return (
-    <div className="bg-main-bg bg-no-repeat bg-cover h-full md:h-screen flex items-center justify-center px-2 md:px-0 py-10">
+    <div className="bg-main-bg bg-no-repeat bg-cover h-full md:h-screen flex flex-col items-center px-2 md:px-0 pt-10">
+      <AccountNav showAccountModal={showAccountModal} setShowAccountModal={setShowAccountModal} />
       <div className="relative w-[450px]">
         <div className="absolute top-0 left-0 right-0 text-xs gap-1 text-white bg-black rounded-full px-5 py-8 flex items-center justify-between">
           <h1 className="grow text-center text-2xl">Welcome </h1>

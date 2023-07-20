@@ -11,6 +11,7 @@ import CreateUser from "../modals/CreateUser";
 import { AiFillCloseCircle, AiOutlineMenu } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import AccountModal from "../modals/AccountModal";
+import AccountNav from "./navbar/AccountNav";
 type pageProps = {
     currentAgency: any
     profiles: any
@@ -31,22 +32,7 @@ function handleModal(){
 
   return (
     <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-full md:h-screen flex flex-col items-center pt-7">
-      <div className="w-full flex items-center justify-between px-5">
-      <Image
-            src="/lg_logo.png"
-            alt="Logo"
-            width={100}
-            height={100}
-            className="select-none"
-            
-          />
-        <div onClick={() => {setShowAccountModal(prev => !prev)}} className="relative flex items-center bg-white rounded-full p-3 cursor-pointer select-none">
-        <FaUserCircle size={30} className="text-primaryBlue" />
-        <AiOutlineMenu size={30} />
-       <AccountModal  showAccountModal={showAccountModal} />
-    
-        </div>
-      </div>
+      <AccountNav showAccountModal={showAccountModal} setShowAccountModal={setShowAccountModal}/>
 
       <div id="profileUsers" className="w-[700px] flex flex-col items-center">
         <div className="gap-1 bg-primaryBlue rounded-full py-5 px-20 flex items-center justify-center">

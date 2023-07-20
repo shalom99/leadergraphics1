@@ -11,9 +11,6 @@ const Page: FC<pageProps> = async  ({}) => {
   const template = await getTemplate();
 
 
-
-
-  // console.log(template)
   return (
 
     <Designer template={template} />

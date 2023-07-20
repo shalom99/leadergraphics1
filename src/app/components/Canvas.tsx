@@ -9,11 +9,7 @@ type pageProps = {
 };
 
 const Canvas: FC<pageProps> = ({ dbtemplate, selected }) => {
-
- 
-
   //  console.log(JSON.parse(dbtemplate[0].basepdf))
-
   let domContainer;
   let designer;
 
