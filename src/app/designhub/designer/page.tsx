@@ -1,5 +1,5 @@
 
-import getTemplate from "@/app/actions/getTemplates";
+import getTemplate from "@/actions/getTemplates";
 
 import Designer from "@/app/components/Designer";
 

@@ -1,5 +1,5 @@
-import AccountModal from '@/app/modals/AccountModal'
-import AgentModal from '@/app/modals/AgentModal'
+import AccountModal from '@/components/modals/AccountModal'
+import AgentModal from '@/components/modals/AgentModal'
 import Image from 'next/image'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai'

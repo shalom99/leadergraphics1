@@ -1,7 +1,7 @@
 
 import './globals.css'
 import { Inter } from 'next/font/google'
-import getCurrentUser from './actions/getCurrentUser'
+import getCurrentUser from '../actions/getCurrentUser'
 
 import { Toaster } from 'react-hot-toast'
 

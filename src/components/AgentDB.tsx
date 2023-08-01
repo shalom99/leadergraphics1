@@ -1,14 +1,19 @@
 "use client";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
 import { BsPersonWorkspace, BsFiles, BsBell, BsFillFilePostFill } from "react-icons/bs";
 import { RxDashboard, RxExit } from "react-icons/rx";
 import {AiOutlineUserSwitch} from 'react-icons/ai'
 import {BiDownArrow, BiUpArrow} from 'react-icons/bi'
 import {GrDocumentText} from 'react-icons/gr'
 
-const AgentDB = () => {
+type props = {
+currentAgent: any
+}
+
+
+const AgentDashboard: FC<props> = ({currentAgent}) => {
   return (
     <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-screen flex">
       <div id="sideMenu" className=" py-5 px-5 flex flex-col items-center">
@@ -21,14 +26,14 @@ const AgentDB = () => {
         />
         <nav className="grow flex flex-col justify-between">
           <div className="flex flex-col gap-y-5">
-            <div className="flex items-center gap-x-2  px-2 py-1 bg-primaryBlue rounded-full">
+            <div className="flex items-center gap-x-2  px-2 py-1 cursor-pointer bg-primaryBlue rounded-full">
               <RxDashboard size={25} /> <p className="font-bold">Campaigns</p>
             </div>
 
-            <div className="flex items-center gap-x-2 px-2 py-1">
+            <div  className="flex items-center gap-x-2 px-2 py-1 cursor-pointer">
               <BsPersonWorkspace size={25} /> Design Hub
             </div>
-            <div className="flex items-center gap-x-2 px-2 py-1">
+            <div className="flex items-center gap-x-2 px-2 py-1 cursor-pointer">
               <BsFiles size={25} /> Drafts
             </div>
           </div>
@@ -58,7 +63,7 @@ const AgentDB = () => {
                 alt="profile"
                 className="bg-black rounded-full"
               />
-              <p className="font-bold">John Doe</p>
+              <p className="font-bold">{currentAgent.first_name +" "+ currentAgent.last_name}</p>
             </div>
           </div>
         </div>
@@ -179,4 +184,4 @@ const AgentDB = () => {
   );
 };
 
-export default AgentDB;
+export default AgentDashboard;

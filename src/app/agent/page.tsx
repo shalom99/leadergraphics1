@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import getAgent from '../actions/getAgent';
+import getAgent from '../../actions/getAgent';
 import { redirect } from 'next/navigation';
 import Agent from '../components/Agent';
 import AgentDB from '../components/AgentDB';
@@ -11,6 +11,7 @@ type pageProps = {
 const Page: FC<pageProps> = async ({searchParams}) => {
 
   const currentAgent = await getAgent(Number(searchParams.agentId));
+  console.log(currentAgent)
   if(!currentAgent){
     redirect('/login')
   }
@@ -19,7 +20,7 @@ const Page: FC<pageProps> = async ({searchParams}) => {
 
   return (
     // <Agent currentAgent={currentAgent} />
-    <AgentDB />
+    <AgentDB currentAgent={currentAgent}/>
   )
 }
 

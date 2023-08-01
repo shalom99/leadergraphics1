@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import AccountNav from "../components/navbar/AccountNav";
+import AccountNav from "@/components/navbar/AccountNav";
 
 type pageProps = {};
 

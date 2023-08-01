@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineFileImage } from "react-icons/ai";
 import Canvas from "./Canvas";
-import cn from "../libs/cn";
+import cn from "../../libs/cn";
 import { toPng } from "html-to-image";
 type DesignerProps = {
   template: any;

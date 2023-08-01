@@ -5,7 +5,7 @@ import { MdOutlineModeEditOutline } from "react-icons/md";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import Loader from "../components/Loader";
+import Loader from "@/components/Loader";
 
 type CreateUserProps = {
   showModal: boolean;
