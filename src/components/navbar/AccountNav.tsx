@@ -7,9 +7,11 @@ import { FaUserCircle } from 'react-icons/fa'
 type AccountNavProps = {
     showAccountModal: boolean
     setShowAccountModal?: Dispatch<SetStateAction<boolean>>
+    Agency: string
 }
 
-const AccountNav: FC<AccountNavProps> = ({setShowAccountModal, showAccountModal}) => {
+const AccountNav: FC<AccountNavProps> = ({setShowAccountModal, showAccountModal, Agency}) => {
+
   return (
     <div className="w-full flex items-center justify-between px-5">
     <Image
@@ -20,7 +22,9 @@ const AccountNav: FC<AccountNavProps> = ({setShowAccountModal, showAccountModal}
           className="select-none"      
         />
       <div onClick={() => {setShowAccountModal?.(prev => !prev)}} className="relative flex items-center bg-white rounded-full p-3 cursor-pointer select-none">
-      <FaUserCircle size={30} className="text-primaryBlue" />
+      <p className='bg-primaryBlue rounded-full text-2xl font-bold px-2 mr-2'>
+        {Agency[0]}A
+        </p>
       <AiOutlineMenu size={30} />
      <AccountModal  showAccountModal={showAccountModal} />
   

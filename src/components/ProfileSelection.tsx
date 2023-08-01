@@ -32,7 +32,7 @@ function handleModal(){
 
   return (
     <div className="bg-gradient-to-r from-rose-100 to-teal-100 h-full md:h-screen flex flex-col items-center pt-7">
-      <AccountNav showAccountModal={showAccountModal} setShowAccountModal={setShowAccountModal}/>
+      <AccountNav showAccountModal={showAccountModal} setShowAccountModal={setShowAccountModal} Agency={currentAgency.name}/>
 
       <div id="profileUsers" className="w-[700px] flex flex-col items-center">
         <div className="gap-1 bg-primaryBlue rounded-full py-5 px-20 flex items-center justify-center">

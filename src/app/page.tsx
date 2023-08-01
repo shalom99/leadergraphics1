@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ClientOnly from "./components/ClientOnly";
+import ClientOnly from "@/components/ClientOnly";
 
 
 export default function Home() {

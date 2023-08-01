@@ -2,7 +2,7 @@ import { FC } from 'react'
 import getAgent from '../../actions/getAgent';
 import { redirect } from 'next/navigation';
 
-import AgentDB from '@/components/AgentDB';
+import AgentDashboard from '@/components/AgentDashboard';
 
 type pageProps = {
   searchParams: any
@@ -20,7 +20,7 @@ const Page: FC<pageProps> = async ({searchParams}) => {
 
   return (
     // <Agent currentAgent={currentAgent} />
-    <AgentDB currentAgent={currentAgent}/>
+    <AgentDashboard currentAgent={currentAgent}/>
   )
 }
 

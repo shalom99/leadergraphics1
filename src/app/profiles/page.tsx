@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ProfileSelection from "@/components/Profiles";
+import ProfileSelection from "@/components/ProfileSelection";
 import getCurrentUser from "@/actions/getCurrentUser";
 import getAgency from "@/actions/getAgency";
 import getProfiles from "@/actions/getProfiles";
