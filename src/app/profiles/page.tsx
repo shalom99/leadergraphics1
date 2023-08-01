@@ -1,8 +1,8 @@
 import { FC } from "react";
-import ProfileSelection from "../components/Profiles";
-import getCurrentUser from "../../actions/getCurrentUser";
-import getAgency from "../../actions/getAgency";
-import getProfiles from "../../actions/getProfiles";
+import ProfileSelection from "@/components/Profiles";
+import getCurrentUser from "@/actions/getCurrentUser";
+import getAgency from "@/actions/getAgency";
+import getProfiles from "@/actions/getProfiles";
 import { redirect } from "next/navigation";
 
 type pageProps = {};

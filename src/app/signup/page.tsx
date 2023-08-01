@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import Loader from "../components/Loader";
+import Loader from "@/components/Loader";
 import { FormSignUpValues } from "@/types";
 type pageProps = {};
 

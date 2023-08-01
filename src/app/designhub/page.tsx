@@ -2,8 +2,8 @@ import { url } from 'inspector'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import Templates from '../components/Templates'
-import Products from '../components/Products'
+import Templates from '@/components/Templates'
+import Products from '@/components/Products'
 
 type pageProps = {
   

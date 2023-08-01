@@ -7,11 +7,11 @@ import { FC, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { GiExitDoor } from "react-icons/gi";
 
-import CreateUser from "../modals/CreateUser";
+import CreateUser from "@/components/modals/CreateUser";
 import { AiFillCloseCircle, AiOutlineMenu } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
-import AccountModal from "../modals/AccountModal";
-import AccountNav from "./navbar/AccountNav";
+import AccountModal from "@/components/modals/AccountModal";
+import AccountNav from "@/components/navbar/AccountNav";
 type pageProps = {
     currentAgency: any
     profiles: any

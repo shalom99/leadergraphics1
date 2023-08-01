@@ -1,7 +1,7 @@
 
 import getTemplate from "@/actions/getTemplates";
 
-import Designer from "@/app/components/Designer";
+import Designer from "@/components/Designer";
 
 import { FC } from "react";
 

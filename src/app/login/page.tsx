@@ -1,7 +1,7 @@
 
 import { FC } from "react";
-import LoginForm from "../../components/forms/LoginForm";
-import getCurrentUser from "../../actions/getCurrentUser";
+import LoginForm from "@/components/forms/LoginForm";
+import getCurrentUser from "@/actions/getCurrentUser";
 import { redirect } from "next/navigation";
 
 

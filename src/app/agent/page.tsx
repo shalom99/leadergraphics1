@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import getAgent from '../../actions/getAgent';
 import { redirect } from 'next/navigation';
-import Agent from '../components/Agent';
-import AgentDB from '../components/AgentDB';
+
+import AgentDB from '@/components/AgentDB';
 
 type pageProps = {
   searchParams: any
